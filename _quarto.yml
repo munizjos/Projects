@@ -3,17 +3,17 @@ project:
   output-dir: docs
 
 website:
-  title: "quartoCourseBlog"
+  title: "Jose's Portfolio"
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/CrumpLab/quartoCourseBlog
-      - icon: twitter
-        href: https://twitter.com/MattCrumpLab
+        href: https://github.com/munizjos/Projects.git
+      - icon: LinkedIn
+        href: https://www.linkedin.com/in/jose-b-muniz-rangel-885915246
 format:
   html:
-    theme: minty
+    theme: flatly
     css: styles.css
 
 editor: visual

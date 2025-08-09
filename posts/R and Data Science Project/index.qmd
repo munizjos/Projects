@@ -2,14 +2,14 @@
 title: "R & Data Science Project"
 author: "Jose Muniz"
 date: "2025-08-06"
-categories: [goals,general]
+categories: [DataScience,R]
 ---
 
 # Understanding Materials and their Mechanical Properties.
 
 ## Question:
 
--   Which materials offer the best combination of mechanical properties, making them suitable for heavy-duty industrial applications?
+Which materials offer the best combination of mechanical properties, making them suitable for heavy-duty industrial applications?
 
 ## Background
 
@@ -17,11 +17,11 @@ Understanding the mechanical properties of materials is an essential part of bei
 
 ## Introduction
 
-In this project, we will investigate a data-set of recorded mechanical properties and understand which materials engineers will select when working with heavy-duty industrial applications. In general, we will be looking for materials that will provide a good blend of strength, toughness, and either high stiffness or high flexibility. In ideal analysis we would also analyze materials to include high thermal resistance for hot environments and high corrosion resistance for fluctuating environments. However, given our limited data set, we will investigate the variables that we think are most significant when determining industrial application, this thus includes ultimate tensile strength, yield strength, elongation at break or strain, and elastic modulus.
+In this project, we will investigate a data-set of recorded mechanical properties and understand which materials engineers will select when working with heavy-duty industrial applications. In general, we will be looking for materials that will provide a good blend of strength, toughness, and either high stiffness or high flexibility. In ideal analysis, we would also analyze materials to include high thermal resistance for hot environments and high corrosion resistance for fluctuating environments. However, given our limited data set, we will investigate the variables that we think are most significant when determining industrial application, which thus includes ultimate tensile strength, yield strength, elongation at break or strain, and elastic modulus.
 
 ### Predictions
 
-Before comparing the mechanical properties of the provided materials, I predict that steel and cast iron will be the materials that offer a good blend of the desired mechanical properties for heavy-duty industrial applications. They are, for instance, both well known to exhibit high tensile strength, high toughness, and low brittleness. In the case of high strength and high flexibility, I predict aluminum to be a well picked material for industrial use.
+Before comparing the mechanical properties of the provided materials, I predict that steel and cast iron will be the materials that offer a good blend of the desired mechanical properties for heavy-duty industrial applications. They are, for instance, both well known to exhibit high tensile strength, high toughness, and low brittleness. In the case of high strength and high flexibility, I predict aluminum to be a well-picked material for industrial use.
 
 ### Data Source Used
 
@@ -63,7 +63,7 @@ For more information visit this [link](https://www.kaggle.com/datasets/purushott
 
 ### Data Set
 
-In this project we will be narrowing down mechanical properties of materials by finding ones that will most likely be used for long term strength and durability. We will examine top choices for stiff and flexible materials as well. The data itself was obtained from the Auto desk Material Library. This data set includes data of 1553 different materials, some materials may be the labeled as the same (e.g, steel) but have different carbon content and are therefore different (e.g, Steel SAE 1020).
+In this project, we will be narrowing down the mechanical properties of materials by finding ones that will most likely be used for long-term strength and durability. We will examine top choices for stiff and flexible materials as well. The data itself was obtained from the AutoDesk Material Library. This data set includes data of 1553 different materials, some materials may be labeled as the same (e.g, steel) but have different carbon content and are therefore different (e.g, Steel SAE 1020).
 
 ### Tools
 
@@ -81,9 +81,9 @@ library(readxl)
 
 ### Approach/Predictions
 
-Given the data-set, I will examine the strength, durability, and compatibility of materials by examining their tensile strength, their yield strength, and elastic modulus. The data will be filtered to meet the demands for hypothetical industrial thresholds, this includes for materials that may require high stiffness or high flexibility.
+Given the dataset, I will examine the strength, durability, and compatibility of materials by examining their tensile strength, their yield strength, and elastic modulus. The data will be filtered to meet the demands for hypothetical industrial thresholds, including materials that may require high stiffness or high flexibility.
 
-In terms of high stiffness, I predict that steel will be the top contender for strength and durability, specifically by achieving a ultimate tensile strength of 700 MPa or higher. In terms of flexibility, I predict for aluminum to be a top contender for strength to weight ratio and flexibility for industry deployment. In specifically I expect aluminum to be about 200 MPa in terms of tensile strength.
+In terms of high stiffness, I predict that steel will be the top contender for strength and durability, specifically by achieving an ultimate tensile strength of 700 MPa or higher. In terms of flexibility, I predict aluminum to be a top contender for strength-to-weight ratio and flexibility for industry deployment. Specifically, I expect aluminum to be about 200 MPa in terms of tensile strength.
 
 ## Results
 
@@ -120,7 +120,9 @@ mydata <- read_xlsx(path = "../../Data.xlsx")
 
 ```
 
-To first understand the strength distribution for all provided materials, a scatter plot was created measuring the ultimate tensile strength for all materials. This plot will be eventually filtered to accommodate for other mechanical properties that an engineer may look at when choosing for ideal materials to implement in a heavy-duty industrial setting.
+*(1) Ultimate Tensile Strength of All Materials*
+
+To first understand the strength distribution for all provided materials, a scatter plot was created measuring the ultimate tensile strength for all materials. This plot will eventually be filtered to accommodate other mechanical properties that an engineer may look at when choosing ideal materials to implement in a heavy-duty industrial setting.
 
 ```{r}
 #| echo: true
@@ -145,7 +147,9 @@ tensile_plot
 ggsave(filename = "tensile_plot.png", tensile_plot)
 ```
 
-We filtered the data to only show the materials with the highest tensile strength. In this case we wanted only the top choices so we set the limit for the Ultimate Tensile Strength to be greater than 1900 MPa.
+*(1b) Top Material Choices for High Ultimate Tensile Strength*
+
+We filtered the data to only show the materials with the highest tensile strength. In this case, we wanted only the top choices, so we set the limit for the Ultimate Tensile Strength to be greater than 1900 MPa.
 
 ```{r}
 #(1) Interested in materials with high tensile strength first.
@@ -168,9 +172,11 @@ high_tensile_plot
 ggsave(filename = "high_tensile_plot.png", high_tensile_plot)
 ```
 
-While maintaining consideration of tensile strength, we also filter materials to have a yield strength over 210 MPa. In this case we want high yield strength, as it allows machinery to be reliable and safe to use after experiencing repetitive use. We don't want it to deform quickly.
+*(2) Top Material Choices for High Ultimate Tensile Strength and Yield Strength*
 
-In general, high yield strength can be defined as the stress needed for a material to begin plastic deformation (i.e., permanent deformation).
+While maintaining consideration of tensile strength, we also filter materials to have a yield strength over 210 MPa. In this case, we want high yield strength, as it allows machinery to be reliable and safe to use after experiencing repetitive use. We don't want it to deform quickly.
+
+In general, yield strength can be defined as the stress needed for a material to begin plastic deformation (i.e., permanent deformation).
 
 ```{r}
 #(2) Figure out the materials with now, high tensile strength and high yield strength.
@@ -200,7 +206,9 @@ ggsave(filename = "tensile_yield_plot.png", tensile_yield_plot)
 ```         
 ```
 
-Realistically, an engineer would want a good blend of material properties. In the case for the need of stiff and strong materials, an engineer may opt to materials that may exhibit high ultimate tensile strength, high yield strength, and medium to high elastic modulus.
+*(3) Top Material Choices for Strong & Stiff Material*
+
+Realistically, an engineer would want a good blend of material properties. In the case of the need for stiff and strong materials, an engineer may opt for materials that may exhibit high ultimate tensile strength, high yield strength, and medium to high elastic modulus.
 
 ```{r}
 #(3) Implement to find medium-high elastic modulus (E), i.e. to resist bending and deformation. Cons: Less flexible materials.
@@ -224,14 +232,20 @@ elastic_plot
 ggsave(filename = "elastic_plot.png", elastic_plot)
 ```
 
+Noted from the scatter plot, one of the general materials that would offer a good blend of mechanical properties for strong yet stiff materials would be steel. Specifically, they would be alloy steels with different grades/specifications, heat treatments methods, and alloying compositions (e.g, different carbon content).
+
 ### Diving Deeper
 
-Exploring the relationships and trade-offs between the materials and their mechanical properties. How much ductility(elongation) can you get in a material while maintaining a strong foundation of strength (i.e., high UTS)?
+Exploring the relationships and trade-offs between the materials and their mechanical properties.
+
+*(I) High Strength vs Ductility*
+
+How much ductility (elongation) can you get in a given material while maintaining a strong foundation of strength (i.e., high UTS)?
+
+Ductility: How far is a material able to deform permanently under tensile stress before breaking.
 
 ```{r}
 # (A) Ultimate Tensile Strength (y) vs Elongation
-#High Strength vs Ductility
-#Ductility: how far is a material able to deform permanently under tensile stress before breaking.
 
 #Change the excel column name to be used in data design
 names(mydata)[names(mydata) == "Heat treatment"] <- "Heat_treatment"
@@ -241,7 +255,7 @@ strength_elongation_plot <- ggplot (
   aes(x=A5, y=Su)) +
   geom_point() +
   labs (
-    title = "Blank",
+    title = "Relationship Between Material's Strength & Ductility",
     x = "Elongation at Break or Strain (%)",
     y = "Ultimate Tensile Strength (MPa)",
   )
@@ -251,10 +265,13 @@ strength_elongation_plot
 ggsave(filename = "strength_elongation_plot.png", strength_elongation_plot)
 ```
 
+*(II) Strength vs Stiffness*
+
+How stiff should a material be while trying to maintain the strength of the given material?
+
 ```{r}
-#(B) How stiff should a material be while trying to mantain the strength of the material?
-# UTS (y) vs Elastic Modulus, E (x)
-#Strength vs Stiffness
+#(B)
+#UTS (y) vs Elastic Modulus, E (x)
 
 strength_stiffness_plot <- ggplot (
   data = mydata,
@@ -270,6 +287,8 @@ strength_stiffness_plot
 #printing out the graph as a png.
 ggsave(filename = "strength_stiffness_plot.png", strength_stiffness_plot)
 ```
+
+*(III) Top Material Choices for High Strength and Low Stiffness (High Flexibility)*
 
 ```{r}
 #(B.II) Strength vs Stiffness
@@ -295,8 +314,10 @@ filtered_plot_h_flexibility
 ggsave(filename = "filtered_plot_h_flexibility.png", filtered_plot_h_flexibility)
 ```
 
+As demonstrated from the scatter plot, aluminum is shown to be one of the top choices for materials that are strong yet flexible for industrial use.
+
 ## Discussion
 
-Type here...
+Based on the results, my previously claimed hypothesis was supported. We found that, in terms of finding materials well-suited for heavy-duty industrial applications, there are three large sectors to be considered. This includes the amount of strength, flexibility, and/or stiffness one may require for a specific use. In terms of finding materials that are well-made for exhibiting high strength and stiffness, we found steel to be a top choice. In terms of finding materials with high strength and low stiffness (high flexibility), we found aluminum to be a top choice.
 
-![](images/clipboard-1358640177.png)
+In regard to the results updating my current beliefs, I find that there are plenty of other factors that one should consider when trying to find the right material for specific industrial use. For instance, this data only provided information about mechanical properties, but for industrial use, chemical properties like thermal and corrosion resistance should also be considered.

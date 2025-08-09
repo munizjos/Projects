@@ -153,8 +153,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title column-body">
       <h1 class="title">R &amp; Data Science Project</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">goals</div>
-                <div class="quarto-category">general</div>
+                <div class="quarto-category">DataScience</div>
+                <div class="quarto-category">R</div>
               </div>
                   </div>
   </div>
@@ -195,9 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Understanding Materials and their Mechanical Properties.</h1>
 <section id="question" class="level2">
 <h2 class="anchored" data-anchor-id="question">Question:</h2>
-<ul>
-<li>Which materials offer the best combination of mechanical properties, making them suitable for heavy-duty industrial applications?</li>
-</ul>
+<p>Which materials offer the best combination of mechanical properties, making them suitable for heavy-duty industrial applications?</p>
 </section>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
@@ -271,6 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
+<p><em>(1) Ultimate Tensile Strength of All Materials</em></p>
 <p>To first understand the strength distribution for all provided materials, a scatter plot was created measuring the ultimate tensile strength for all materials. This plot will be eventually filtered to accommodate for other mechanical properties that an engineer may look at when choosing for ideal materials to implement in a heavy-duty industrial setting.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (0) First graph, exploring materials and their Ultimate Tensile Strength (Su) in MPa.</span></span>
@@ -302,6 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
 </div>
+<p><em>(1b) Top Material Choices for High Ultimate Tensile Strength</em></p>
 <p>We filtered the data to only show the materials with the highest tensile strength. In this case we wanted only the top choices so we set the limit for the Ultimate Tensile Strength to be greater than 1900 MPa.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(1) Interested in materials with high tensile strength first.</span></span>
@@ -333,8 +333,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
 </div>
+<p><em>(2) Top Material Choices for High Ultimate Tensile Strength and Yield Strength</em></p>
 <p>While maintaining consideration of tensile strength, we also filter materials to have a yield strength over 210 MPa. In this case we want high yield strength, as it allows machinery to be reliable and safe to use after experiencing repetitive use. We don’t want it to deform quickly.</p>
-<p>In general, high yield strength can be defined as the stress needed for a material to begin plastic deformation (i.e., permanent deformation).</p>
+<p>In general, yield strength can be defined as the stress needed for a material to begin plastic deformation (i.e., permanent deformation).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(2) Figure out the materials with now, high tensile strength and high yield strength.</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -368,6 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <pre><code></code></pre>
+<p><em>(3) Top Material Choices for Strong &amp; Stiff Material</em></p>
 <p>Realistically, an engineer would want a good blend of material properties. In the case for the need of stiff and strong materials, an engineer may opt to materials that may exhibit high ultimate tensile strength, high yield strength, and medium to high elastic modulus.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(3) Implement to find medium-high elastic modulus (E), i.e. to resist bending and deformation. Cons: Less flexible materials.</span></span>
@@ -399,28 +401,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
 </div>
+<p>Noted from the scatter plot, one of the general materials that would offer a good blend of mechanical properties for strong yet stiff materials would be steel. Specifically, they would be alloy steels with different grades/specifications, heat treatments methods, and alloying compositions (e.g, different carbon content).</p>
 <section id="diving-deeper" class="level3">
 <h3 class="anchored" data-anchor-id="diving-deeper">Diving Deeper</h3>
-<p>Exploring the relationships and trade-offs between the materials and their mechanical properties. How much flexibility can you get in a material while maintaining a strong foundation of strength (i.e., high UTS)?</p>
-<p>(1)</p>
+<p>Exploring the relationships and trade-offs between the materials and their mechanical properties.</p>
+<p><em>(I) High Strength vs Ductility</em></p>
+<p>How much ductility (elongation) can you get in a given material while maintaining a strong foundation of strength (i.e., high UTS)?</p>
+<p>Ductility: How far is a material able to deform permanently under tensile stress before breaking.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (A) Ultimate Tensile Strength (y) vs Elongation</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#High Strength vs Ductility</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Ductility: how far is a material able to deform permanently under tensile stress before breaking.</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Change the excel column name to be used in data design</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)[<span class="fu">names</span>(mydata) <span class="sc">==</span> <span class="st">"Heat treatment"</span>] <span class="ot">&lt;-</span> <span class="st">"Heat_treatment"</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>strength_elongation_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span> (</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata,</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>A5, <span class="at">y=</span>Su)) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span> (</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Blank"</span>,</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Elongation at Break or Strain (%)"</span>,</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Ultimate Tensile Strength (MPa)"</span>,</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>strength_elongation_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Change the excel column name to be used in data design</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)[<span class="fu">names</span>(mydata) <span class="sc">==</span> <span class="st">"Heat treatment"</span>] <span class="ot">&lt;-</span> <span class="st">"Heat_treatment"</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>strength_elongation_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span> (</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>A5, <span class="at">y=</span>Su)) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span> (</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relationship Between Material's Strength &amp; Ductility"</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Elongation at Break or Strain (%)"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Ultimate Tensile Strength (MPa)"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>strength_elongation_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 206 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
@@ -442,22 +445,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 (`geom_point()`).</code></pre>
 </div>
 </div>
+<p><em>(II) Strength vs Stiffness</em></p>
+<p>How stiff should a material be while trying to maintain the strength of the given material?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(B) How stiff should a material be while trying to mantain the strength of the material?</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># UTS (y) vs Elastic Modulus, E (x)</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Strength vs Stiffness</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>strength_stiffness_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span> (</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>E, <span class="at">y=</span>Su)) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span> (</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Strength vs Stiffness"</span>,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"How stiff should a material be to mantain strength?"</span>,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Elastic Modulus, E (MPa)"</span>,</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Ultimate Tensile Strength (MPa)"</span>,</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>strength_stiffness_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(B)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#UTS (y) vs Elastic Modulus, E (x)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>strength_stiffness_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span> (</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>E, <span class="at">y=</span>Su)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span> (</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Strength vs Stiffness"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"How stiff should a material be to mantain strength?"</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Elastic Modulus, E (MPa)"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Ultimate Tensile Strength (MPa)"</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>strength_stiffness_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -471,6 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
 </div>
+<p><em>(III) Top Material Choices for High Strength and Low Stiffness (High Flexibility)</em></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(B.II) Strength vs Stiffness</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Exploring the materials with high strength and high flexibility.</span></span>
@@ -504,12 +509,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
 </div>
+<p>As demonstrated from the scatter plot, aluminum is shown to be one of the top choice for materials that are strong yet flexible for industrial use.</p>
 </section>
 </section>
 <section id="discussion" class="level2">
 <h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
-<p>Type here…</p>
-<p><img src="images/clipboard-1358640177.png" class="img-fluid"></p>
+<p>Based on the results, my previously claimed hypothesis was supported. We found that, in terms of finding materials well-suited for heavy-duty industrial applications, there are three large sectors to be considered. This includes the amount of strength, flexibility, and/or stiffness one may require for a specific use. In terms of finding materials that are well-made for exhibiting high strength and stiffness, we found steel to be a top choice. In terms of finding materials with high strength and low stiffness (high flexibility), we found aluminum to be a top choice.</p>
+<p>In regard to the results updating my current beliefs, I find that there are plenty of other factors that one should consider when trying to find the right material for specific industrial use. For instance, this data only provided information about mechanical properties, but for industrial use, chemical properties like thermal and corrosion resistance should also be considered.</p>
 
 
 </section>
